@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: TrackExpensensApp
-  description: Hello world
+  description: TrackExpensesApp created by Bycza Zagroda community.
   version: 0.2.1
 
 paths:
