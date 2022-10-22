@@ -1,5 +1,5 @@
 ---
-title: TrackExpensensApp v0.2.1
+title: OpenAPI definition v0
 language_tabs:
   - http: HTTP
   - shell: Shell
@@ -13,13 +13,15 @@ headingLevel: 2
 
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="trackexpensensapp">TrackExpensensApp v0.2.1</h1>
+<h1 id="openapi-definition">OpenAPI definition v0</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-TrackExpensesApp created by Bycza Zagroda community.
+Base URLs:
 
-<h1 id="trackexpensensapp-wallet">wallet</h1>
+* <a href="http://localhost:9090">http://localhost:9090</a>
+
+<h1 id="openapi-definition-wallet-controller">wallet-controller</h1>
 
 ## getAllWallets
 
@@ -28,24 +30,20 @@ TrackExpensesApp created by Bycza Zagroda community.
 > Code samples
 
 ```http
-GET /api/wallet HTTP/1.1
-
-Accept: application:json
+GET http://localhost:9090/api/wallet HTTP/1.1
+Host: localhost:9090
+Accept: */*
 
 ```
 
 ```shell
 # You can also use wget
-curl -X GET /api/wallet \
-  -H 'Accept: application:json'
+curl -X GET http://localhost:9090/api/wallet \
+  -H 'Accept: */*'
 
 ```
 
 `GET /api/wallet`
-
-*get all wallets*
-
-provides information about all wallets
 
 > Example responses
 
@@ -55,7 +53,9 @@ provides information about all wallets
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|Inline|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|string|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal Server Error|string|
 
 <h3 id="getallwallets-responseschema">Response Schema</h3>
 
@@ -65,40 +65,36 @@ Status Code **200**
 |---|---|---|---|---|
 |*anonymous*|[[WalletDTO](#schemawalletdto)]|false|none|none|
 |» id|integer(int64)|false|none|none|
-|» name|string(string)|false|none|none|
+|» name|string|false|none|none|
 |» creationDate|string(date-time)|false|none|none|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## createNewWallet
+## createWallet
 
-<a id="opIdcreateNewWallet"></a>
+<a id="opIdcreateWallet"></a>
 
 > Code samples
 
 ```http
-POST /api/wallet HTTP/1.1
-
+POST http://localhost:9090/api/wallet HTTP/1.1
+Host: localhost:9090
 Content-Type: application/json
-Accept: application/json
+Accept: */*
 
 ```
 
 ```shell
 # You can also use wget
-curl -X POST /api/wallet \
+curl -X POST http://localhost:9090/api/wallet \
   -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
+  -H 'Accept: */*'
 
 ```
 
 `POST /api/wallet`
-
-*create new wallet*
-
-create new wallet with given names
 
 > Body parameter
 
@@ -108,60 +104,29 @@ create new wallet with given names
 }
 ```
 
-<h3 id="createnewwallet-parameters">Parameters</h3>
+<h3 id="createwallet-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[CreateWalletDTO](#schemacreatewalletdto)|false|create new wallet|
+|body|body|[CreateWalletDTO](#schemacreatewalletdto)|true|none|
 
 > Example responses
 
 > 200 Response
 
-```json
-{
-  "id": 1,
-  "name": "WalletName",
-  "creationDate": "2022-10-22T09:47:52.595721658Z"
-}
-```
-
-<h3 id="createnewwallet-responses">Responses</h3>
+<h3 id="createwallet-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|[WalletDTO](#schemawalletdto)|
-|405|[Method Not Allowed](https://tools.ietf.org/html/rfc7231#section-6.5.5)|invalid input data|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[WalletDTO](#schemawalletdto)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|string|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal Server Error|string|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
 # Schemas
-
-<h2 id="tocS_WalletDTO">WalletDTO</h2>
-<!-- backwards compatibility -->
-<a id="schemawalletdto"></a>
-<a id="schema_WalletDTO"></a>
-<a id="tocSwalletdto"></a>
-<a id="tocswalletdto"></a>
-
-```json
-{
-  "id": 1,
-  "name": "WalletName",
-  "creationDate": "2022-10-22T09:47:52.595721658Z"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|id|integer(int64)|false|none|none|
-|name|string(string)|false|none|none|
-|creationDate|string(date-time)|false|none|none|
 
 <h2 id="tocS_CreateWalletDTO">CreateWalletDTO</h2>
 <!-- backwards compatibility -->
@@ -181,5 +146,29 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|name|string(string)|false|none|none|
+|name|string|true|none|none|
+
+<h2 id="tocS_WalletDTO">WalletDTO</h2>
+<!-- backwards compatibility -->
+<a id="schemawalletdto"></a>
+<a id="schema_WalletDTO"></a>
+<a id="tocSwalletdto"></a>
+<a id="tocswalletdto"></a>
+
+```json
+{
+  "id": 0,
+  "name": "string",
+  "creationDate": "2019-08-24T14:15:22Z"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|integer(int64)|false|none|none|
+|name|string|false|none|none|
+|creationDate|string(date-time)|false|none|none|
 
